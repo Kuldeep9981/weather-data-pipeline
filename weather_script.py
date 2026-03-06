@@ -61,7 +61,7 @@ def fetch_weather():
             "Humidity": data["main"]["humidity"],
             "Wind_Speed": data["wind"]["speed"],
             "Weather": data["weather"][0]["description"],
-            "Datetime": datetime.now()
+            "Datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
 
         weather_list.append(weather_data)
