@@ -86,8 +86,7 @@ def fetch_weather():
     # Clean Data
     new_df["Datetime"] = pd.to_datetime(new_df["Datetime"])
     new_df["City"] = new_df["City"].str.title()
-    new_df["Rain_Probability"] = new_df["Rain_Probability"].fillna(0)
-
+    
     print("New Weather Data:")
     print(new_df)
 
