@@ -61,7 +61,7 @@ def fetch_weather():
             "Humidity": data["main"]["humidity"],
             "Wind_Speed": data["wind"]["speed"],
             "Weather": data["weather"][0]["description"],
-            "Datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "Datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "Rain_Probability": data["list"][0]["pop"] * 100
         }
 
@@ -76,6 +76,7 @@ def fetch_weather():
     # Clean Data
     new_df["Datetime"] = pd.to_datetime(new_df["Datetime"])
     new_df["City"] = new_df["City"].str.title()
+    new_df["Rain_Probability"] = new_df["Rain_Probability"].fillna(0)
 
     print("New Weather Data:")
     print(new_df)
