@@ -25,7 +25,7 @@ AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
 BUCKET_NAME = "weather-data-project-kuldeep"
 FILE_KEY = "weather-data/weather_data.csv"
 
-cities = ["Indore","Ujjain","Dewas","Bhopal","Mandsaur","Delhi","Mumbai","Bangalore"]
+cities = ["Indore","Ujjain","Dewas","Bhopal","Mandsaur","Gwalior","Vidisha","Noida","Delhi","Mumbai","Bangalore"]
 
 # ==========================
 # CONNECT TO AMAZON S3
@@ -62,6 +62,7 @@ def fetch_weather():
             "Wind_Speed": data["wind"]["speed"],
             "Weather": data["weather"][0]["description"],
             "Datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "Rain_Probability": data["list"][0]["pop"] * 100
         }
 
         weather_list.append(weather_data)
@@ -97,6 +98,8 @@ def fetch_weather():
         Bucket=BUCKET_NAME,
         Key=FILE_KEY,
         Body=csv_buffer.getvalue()
+        ContentType='text/csv',
+        ACL='public-read'
     )
 
     print("Data uploaded successfully at:", datetime.now())
