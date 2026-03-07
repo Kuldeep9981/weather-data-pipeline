@@ -98,7 +98,7 @@ def fetch_weather():
     s3.put_object(
         Bucket=BUCKET_NAME,
         Key=FILE_KEY,
-        Body=csv_buffer.getvalue()
+        Body=csv_buffer.getvalue(),
         ContentType='text/csv',
         ACL='public-read'
     )
