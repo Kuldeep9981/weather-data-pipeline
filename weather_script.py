@@ -53,6 +53,16 @@ def fetch_weather():
         if response.status_code != 200:
             print(f"API Error for {city}: {data}")
             continue
+           
+        # -------- Forecast API for Rain Probability --------
+        forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&units=metric"
+        forecast_response = requests.get(forecast_url)
+        forecast_data = forecast_response.json()
+
+        rain_probability = None
+
+        if forecast_response.status_code == 200:
+        rain_probability = forecast_data["list"][0].get("pop", 0) * 100
 
         weather_data = {
             "City": city,
@@ -62,7 +72,7 @@ def fetch_weather():
             "Wind_Speed": data["wind"]["speed"],
             "Weather": data["weather"][0]["description"],
             "Datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "Rain_Probability": data["list"][0]["pop"] * 100
+            "Rain_Probability": rain_probability
         }
 
         weather_list.append(weather_data)
