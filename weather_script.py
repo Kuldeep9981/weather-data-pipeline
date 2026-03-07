@@ -62,7 +62,7 @@ def fetch_weather():
         rain_probability = None
 
         if forecast_response.status_code == 200:
-        rain_probability = forecast_data["list"][0].get("pop", 0) * 100
+            rain_probability = forecast_data["list"][0].get("pop", 0) * 100
 
         weather_data = {
             "City": city,
