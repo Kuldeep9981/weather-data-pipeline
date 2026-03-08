@@ -11,7 +11,7 @@ import requests
 import pandas as pd
 import boto3
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from io import StringIO
 
 # ==========================
@@ -53,7 +53,11 @@ def fetch_weather():
         if response.status_code != 200:
             print(f"API Error for {city}: {data}")
             continue
-           
+        
+        
+        # Convert API timestamp (UTC → IST)
+        api_time = datetime.utcfromtimestamp(data["dt"]) + timedelta(hours=5, minutes=30)
+   
         # -------- Forecast API for Rain Probability --------
         forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&units=metric"
         forecast_response = requests.get(forecast_url)
@@ -71,7 +75,7 @@ def fetch_weather():
             "Humidity": data["main"]["humidity"],
             "Wind_Speed": data["wind"]["speed"],
             "Weather": data["weather"][0]["description"],
-            "Datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Datetime": api_time,
             "Rain_Probability": rain_probability
         }
 
