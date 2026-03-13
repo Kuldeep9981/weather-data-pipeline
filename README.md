@@ -108,4 +108,20 @@ This enables **continuous real-time weather monitoring without manual updates.**
 
 ---
 
-# 📂 Project Structure
+
+---
+
+# 📈 Key Insights
+
+- Temperature reaches **lowest level around 6 AM**
+- Temperature increases gradually until afternoon
+- Humidity fluctuates throughout the day
+- Wind speed varies hourly depending on weather conditions
+
+---
+
+# 👨‍💻 Author
+
+**Kuldeep Patidar**
+
+Aspiring Data Analyst
